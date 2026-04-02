@@ -1,0 +1,27 @@
+# Logs
+*.retry
+*.log
+
+# Secrets
+.vault_pass
+*.env
+.env.*
+secrets/
+*_secret*
+*_password*
+inventory/group_vars/services/vault.yml
+
+# Ansible
+*.retry
+.ansible/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+venv

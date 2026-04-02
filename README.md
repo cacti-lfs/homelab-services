@@ -1,7 +1,5 @@
 <div align="center">
  
-<img src="docs/schema_architecture_infra.gif" alt="HomeLab Architecture" width="80%"/>
- 
 # 🏠 homelab-services
  
 **Automatisation, sécurisation et déploiement d'une infrastructure personnelle avec Ansible**
@@ -15,9 +13,11 @@
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Active%20Development-orange?style=flat-square)]()
  
+<img src="docs/schema_architecture_infra.gif" alt="HomeLab Architecture" width="80%"/>
+
 > ⚠️ Projet en évolution active, conçu pour un usage homelab et auto-hébergement
 > 🖥️ Tout le processus se fait localement depuis son poste
- 
+
 </div>
 
 ---

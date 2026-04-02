@@ -7,7 +7,7 @@
 **Automatisation, sécurisation et déploiement d'une infrastructure personnelle avec Ansible**
  
 [![Ansible](https://img.shields.io/badge/Ansible-2.10+-EE0000?style=flat-square&logo=ansible&logoColor=white)](https://docs.ansible.com/)
-[![Proxmox](https://img.shields.io/badge/Proxmox-VE%208.3-E57000?style=flat-square&logo=proxmox&logoColor=white)](https://www.proxmox.com/)
+[![Proxmox](https://img.shields.io/badge/Proxmox-VE%209.1-E57000?style=flat-square&logo=proxmox&logoColor=white)](https://www.proxmox.com/)
 [![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-OS-A22846?style=flat-square&logo=raspberrypi&logoColor=white)](https://www.raspberrypi.com/)
 [![Rocky Linux](https://img.shields.io/badge/Rocky%20Linux-9-10B981?style=flat-square&logo=rockylinux&logoColor=white)](https://rockylinux.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/compose/)

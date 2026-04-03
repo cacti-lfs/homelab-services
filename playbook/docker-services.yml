@@ -1,0 +1,8 @@
+---
+- name: Installation et configuration des services Docker
+  hosts: services
+  remote_user: "{{ ansible_user }}"
+
+  roles:
+    - docker
+    - docker_services

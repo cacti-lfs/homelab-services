@@ -1,0 +1,9 @@
+---
+- name: Configuration et sécurisation des systèmes
+  hosts: homelab_cluster,services,pi
+  remote_user: "{{ ansible_user }}"
+
+  roles:
+    - ssh_hardening
+    - sysctl_config
+    - fail2ban_install

@@ -1,0 +1,27 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "{{ n8n_port_main | default(5678) }}:5678"  
+      - "{{ n8n_port_runner | default(5679) }}:5679" 
+
+    environment:
+      N8N_HOST: {{ n8n_host }}
+      VUE_APP_URL_BASE_API: "https://{{ n8n_host }}/"
+      WEBHOOK_URL: "https://{{ n8n_host }}/"
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      N8N_RUNNERS_ENABLED: "true"
+      N8N_RUNNERS_MODE: external
+      N8N_RUNNERS_AUTH_TOKEN: "{{ n8n_runner_token }}"
+      N8N_RUNNERS_BROKER_LISTEN_ADDRESS: 0.0.0.0
+      N8N_RUNNERS_TASK_BROKER_URI: "localhost:{{ n8n_port_runner | default(5679) }}"
+      N8N_RUNNERS_MAX_CONCURRENCY: "5"
+      N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT: "15"
+      NODE_OPTIONS: "--max-old-space-size=3072"
+      N8N_TRUST_PROXY: "true"
+      TZ: "Europe/Paris"
+
+    volumes:
+      - ./n8n_data:/home/node/.n8n

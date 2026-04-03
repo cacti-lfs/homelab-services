@@ -1,0 +1,14 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+
+    ports:
+      - "{{ vaultwarden_port | default(8080) }}:80"
+    volumes:
+      - ./vw-data:/data
+    environment:
+      - SIGNUPS_ALLOWED=yes
+      - ADMIN_TOKEN="{{ vault_admin_token }}"
+      - DOMAIN="{{ vaultwarden_domain }}"

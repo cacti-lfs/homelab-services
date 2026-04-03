@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:15
+    container_name: miniflux_db
+    environment:
+      POSTGRES_USER: miniflux
+      POSTGRES_PASSWORD: "{{ miniflux_db_password }}"
+      POSTGRES_DB: miniflux
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    restart: always
+
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: miniflux_app
+    environment:
+      DATABASE_URL: postgres://miniflux:{{ miniflux_db_password }}@db/miniflux?sslmode=disable
+      RUN_MIGRATIONS: 1
+      CREATE_ADMIN: 1
+      ADMIN_USERNAME: "{{ miniflux_admin_username }}"
+      ADMIN_PASSWORD: "{{ miniflux_admin_password }}"
+      OAUTH2_PROVIDER: google
+      OAUTH2_CLIENT_ID: "{{ miniflux_oauth_client_secret_id | default('CHANGER_MOI') }}"
+      OAUTH2_CLIENT_SECRET: "{{ miniflux_oauth_client_secret }}"
+      OAUTH2_REDIRECT_URL: "{{ miniflux_oauth_redirect_url | default('https://domain_custom.com/callback') }}" 
+      OAUTH2_USER_CREATION: 1
+      PROXY_ENABLE: 1
+    ports:
+      - "{{ minifluc_port | default(8080) }}:8080"
+    depends_on:
+      - db
+    restart: always

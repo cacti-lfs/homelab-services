@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:17
+    container_name: openproject_db
+    restart: always
+    environment:
+      POSTGRES_USER: "{{ openproject_db_user }}"
+      POSTGRES_PASSWORD: "{{ openproject_db_password }}"
+      POSTGRES_DB: "{{ openproject_db_name }}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  openproject:
+    image: openproject/openproject:17
+    container_name: openproject_app
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "{{ openproject_port | default(8088) }}:8080"
+    environment:
+      OPENPROJECT_HTTPS: "true"
+      OPENPROJECT_HOST__NAME: "{{ openproject_host }}"
+      OPENPROJECT_SECRET_KEY_BASE: "{{ openproject_secret_key }}"
+      DATABASE_URL: "postgres://openproject:{{ openproject_db_password }}@db:5432/openproject"
+      OPENPROJECT_PORT: "443"
+      OPENPROJECT_RAILS__FORCE__SSL: "true"
+      OPENPROJECT_RAILS__RELATIVE__URL__ROOT: ""
+      OPENPROJECT_RAILS__TRUSTED__PROXIES: 127.0.0.1, ::1, 192.168.1.245, 172.16.0.0/12
+    volumes:
+      - opdata:/var/openproject/assets
+
+volumes:
+  pgdata:
+  opdata:

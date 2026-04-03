@@ -1,0 +1,27 @@
+---
+- name: "Sysctl: Configuration de base pour le durcissement"
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/99-hardening.conf
+    content: |
+      # Désactiver le forwarding IP
+      net.ipv4.ip_forward = {{ sysctl_ip_forward | default(0) }}
+      net.ipv6.conf.all.forwarding = {{ sysctl_ipv6_forward | default(0) }}
+
+      # Protections contre les attaques SYN flood
+      net.ipv4.tcp_syncookies = 1
+
+      # Réduire le délai d'attente des connexions TCP
+      net.ipv4.tcp_fin_timeout = 15
+
+      # Protection contre les attaques de type "Smurf"
+      net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+      # Protection contre les attaques de type "Ping of Death"
+      net.ipv4.icmp_ignore_bogus_error_responses = 1
+
+      # Protection contre les attaques de type "IP Spoofing"
+      net.ipv4.conf.all.rp_filter = 1
+      net.ipv4.conf.default.rp_filter = 1
+    mode: '0644'
+  become: true
+  notify: Apply sysctl

@@ -1,0 +1,62 @@
+---
+- name: "Vérifier qu'une clé publique est fournie"
+  ansible.builtin.assert:
+    that:
+      - ssh_public_key is defined
+      - ssh_public_key | length > 0
+    fail_msg: "La variable ssh_public_key est requise."
+
+- name: "Implémentation clefs"
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ ssh_public_key }}"
+  become: true
+
+- name: "Désactivation auth par mot de passe"
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    state: present
+  become: true
+  notify: Restart SSH
+
+- name: "Forcer clef SSH uniquement"
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PubkeyAuthentication'
+    line: 'PubkeyAuthentication yes'
+    state: present
+  become: true
+  notify: Restart SSH
+
+- name: "Désactivation root login"
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin no'
+    state: present
+  become: true
+  notify: Restart SSH
+
+- name: "Port SSH"
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?Port\s+'
+    line: "Port {{ ssh_port | default(22) }}"
+    state: present
+    validate: '/usr/sbin/sshd -t -f %s'
+  become: true
+  notify: Restart SSH
+
+- name: "Utilisateurs autorisés"
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?AllowUsers\s+'
+    line: "AllowUsers {{ ssh_allowed_users | join(' ') }}"
+    state: present
+    validate: '/usr/sbin/sshd -t -f %s'
+  become: true
+  when: ssh_allowed_users is defined and ssh_allowed_users | length > 0
+  notify: Restart SSH

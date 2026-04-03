@@ -1,0 +1,23 @@
+# Default
+ansible_user: "{{ ansible_user_rocky }}"
+# ansible_python_interpreter: # A modifier
+
+# KitchenOwl
+kitchenowl_front_port: 8244
+
+# Miniflux
+miniflux_port: 8080
+
+# n8n
+n8n_port_main: 5678
+n8n_port_runner: 5679
+
+# openproject
+openproject_port: 8088
+
+# vaultwarden
+vaultwarden_port: 8080
+
+# SSH Hardening playbook
+ssh_port: 22
+ssh_allowed_users: {{ ssh_allowed_users_list }}

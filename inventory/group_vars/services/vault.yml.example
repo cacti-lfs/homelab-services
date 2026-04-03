@@ -1,0 +1,38 @@
+# kitchenowl
+kitchenowl_jwt_secret: ""
+
+# miniflux
+miniflux_db_password: ""
+miniflux_admin_username: ""
+miniflux_admin_password: ""
+miniflux_oauth_client_secret_id: ""
+miniflux_oauth_client_secret: ""
+miniflux_oauth_redirect_url: ""
+
+# n8n
+n8n_runner_token: ""
+n8n_host: ""
+
+# openproject
+openproject_db_password: ""
+openproject_db_user: ""
+openproject_db_name: ""
+openproject_secret_key: ""
+openproject_host: ""
+
+# vaultwarden
+vaultwarden_admin_token: ""
+vaultwarden_domain: ""
+
+# Ansible User
+ansible_user_rocky: ""
+ansible_user_pi: ""
+ansible_user_pve: ""
+
+# Inventaire IP
+srv_rocky_ip: ""
+srv_pve1_ip: ""
+srv_pve2_ip: ""
+srv_pi1_ip: ""
+
+ssh_allowed_users_list = 

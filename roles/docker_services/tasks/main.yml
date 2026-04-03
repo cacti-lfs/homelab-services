@@ -1,0 +1,38 @@
+---
+- name: "Créer les répertoires pour les services"
+  file:
+    path: "/opt/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - vault
+    - kitchenowl
+    - miniflux
+    - openproject
+    - n8n
+  become: true
+
+- name: "Copier docker-compose et env."
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: '0644'
+  become: true
+  loop:
+    - { src: 'vaultwarden/docker-compose.yml.j2', dest: '/opt/vault/docker-compose.yml' }
+    - { src: 'kitchenowl/docker-compose.yml.j2', dest: '/opt/kitchenowl/docker-compose.yml' }
+    - { src: 'n8n/docker-compose.yml.j2', dest: '/opt/n8n/docker-compose.yml' }
+    - { src: 'miniflux/docker-compose.yml.j2', dest: '/opt/miniflux/docker-compose.yml' }
+    - { src: 'openproject/docker-compose.yml.j2', dest: '/opt/openproject/docker-compose.yml' }
+
+- name: "Lancement des services"
+  shell: docker compose up -d
+  args:
+    chdir: "/opt/{{ item }}"
+  loop:
+    - vault
+    - kitchenowl
+    - n8n
+    - miniflux
+    - openproject
+  become: true

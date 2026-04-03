@@ -1,0 +1,24 @@
+---
+- name: "Installation de Docker et Docker Compose"
+  dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+    state: present
+  become: true
+
+- name: Ajout utilisateur au groupe docker
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: true
+  become: true
+
+- name: "Démarrer et activer le service Docker"
+  systemd:
+    name: docker
+    state: started
+    enabled: true
+  become: true

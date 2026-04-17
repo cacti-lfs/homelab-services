@@ -4,6 +4,6 @@
   remote_user: "{{ ansible_user }}"
 
   roles:
-    - ssh_hardening
+    - SSH_Hardening
     - sysctl_config
     - fail2ban_install

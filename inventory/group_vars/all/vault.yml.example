@@ -28,6 +28,7 @@ vaultwarden_domain: ""
 ansible_user_rocky: ""
 ansible_user_pi: ""
 ansible_user_pve: ""
+ansible_public_key: ""
 
 # Inventaire IP
 srv_rocky_ip: ""
@@ -35,4 +36,4 @@ srv_pve1_ip: ""
 srv_pve2_ip: ""
 srv_pi1_ip: ""
 
-ssh_allowed_users_list = 
+ssh_allowed_users_list = ["", ""]

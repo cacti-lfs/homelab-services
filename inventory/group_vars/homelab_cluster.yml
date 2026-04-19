@@ -1,2 +1,4 @@
 ansible_user: "{{ ansible_user_pve }}"
 # ansible_python_interpreter: # A modifier
+sysctl_ip_forward: 0
+sysctl_ipv6_forward: 0

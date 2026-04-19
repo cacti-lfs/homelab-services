@@ -20,4 +20,7 @@ vaultwarden_port: 8080
 
 # SSH Hardening playbook
 ssh_port: 22
-ssh_allowed_users: {{ ssh_allowed_users_list }}
+ssh_allowed_users: "{{ ssh_allowed_users_list }}"
+
+sysctl_ip_forward: 0
+sysctl_ipv6_forward: 0

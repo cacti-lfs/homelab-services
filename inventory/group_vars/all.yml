@@ -1,3 +1,0 @@
-ssh_public_key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
-sysctl_ip_forward: 0
-sysctl_ipv6_forward: 0

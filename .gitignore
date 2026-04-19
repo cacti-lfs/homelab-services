@@ -9,7 +9,7 @@
 secrets/
 *_secret*
 *_password*
-inventory/group_vars/services/vault.yml
+inventory/group_vars/all/vault.yml
 
 # Ansible
 *.retry
@@ -25,3 +25,8 @@ Thumbs.db
 
 # Python
 venv
+
+# Personnel
+.gitignore
+docs/*
+!docs/schema_architecture_infra.gif
